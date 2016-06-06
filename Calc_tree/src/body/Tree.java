@@ -1,12 +1,17 @@
 package body;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 //PERGUNTAR PRA ALGUÉM DOS IMPORTS, PORQUE NÃO CONSIGO USAR HIERARQUIA DE LIST<>
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Tree<E> {
 	private Node root;
 	private E element;
-	private int height;
 	
 	private class Node {
 		public E elem;
@@ -23,7 +28,6 @@ public class Tree<E> {
 	}
 	
 	public Tree(){
-		height = 0;
 		root = null;
 	}
 	
@@ -83,21 +87,53 @@ public class Tree<E> {
     public LinkedList<E> positionsWidth() {
         LinkedList<E> res = new LinkedList<>();
         if (root != null) {
-        	ArrayList<Node> fila = new ArrayList<>();
+        	ArrayList<Node> queue = new ArrayList<>();
         	Node aux = null;
         	int i = 0;
-            fila.add(root);
-            while(!fila.isEmpty()) {
-                aux = fila.remove(i);
+            queue.add(root);
+            while(!queue.isEmpty()) {
+                aux = queue.remove(i);
                 if (aux.left != null)
-                    fila.add(aux.left);
+                    queue.add(aux.left);
                 if (aux.right != null)
-                    fila.add(aux.right);
+                    queue.add(aux.right);
                 res.add(aux.elem);
                 i++;
             }
         }        
         return res;
+    }
+    
+    public int height() {
+        Node end = null;
+        if (root != null) {
+        	ArrayList<Node> queue = new ArrayList<>();
+        	Node aux = null;
+        	int i = 0;
+            queue.add(root);
+            while(!queue.isEmpty()) {
+                aux = queue.remove(i);
+                if (aux.left != null)
+                    queue.add(aux.left);
+                if (aux.right != null)
+                    queue.add(aux.right);
+                end = aux;
+                i++;
+            }
+        }                  
+        int count=0;        
+        while (end != root) {
+            count++;
+            end = end.father;
+        }        
+        return count;     
+    }
+    
+    public void buildTree(E[] data){
+    	
+    	for(int i=0;i<data.length;i++){
+    		
+    	}
     }
 	
 	private Node searchNodeRef(E element, Node target){
@@ -114,5 +150,22 @@ public class Tree<E> {
 			}
 		}
 		return res;
+	}
+	
+	public void loadFile(){
+		Path path = Paths.get("expressoes.txt");
+		try(Scanner in = new Scanner(Files.newBufferedReader(path, Charset.forName("utf8")))){
+			String s;
+			String[] x;
+			while(in.hasNextLine()){
+				s = in.nextLine();
+				x = s.split(" ");
+				//ajeitar isso
+				this.buildTree(x);
+			}
+		}
+		catch(IOException x){
+			System.err.format("Erro de E/S: %s%n", x);
+		}
 	}
 }
