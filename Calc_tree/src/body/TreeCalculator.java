@@ -32,10 +32,23 @@ public class TreeCalculator {
 					continue;
 				}
 		} */
-		
+			
 		for(int i=0; i<bir.size(); i++){
 			if(bir.get(i).element == ')'){
-				
+				bir.remove(i);
+				i--;
+				Node aux1 = bir.get(i);
+				bir.remove(i);
+				i--;
+				Node aux2 = bir.get(i);				
+				bir.remove(i);
+				i--;
+				Node aux3 = bir.get(i);				
+				bir.remove(i);
+				i--;
+				bir.set(i, aux2);
+				bir.get(i).left = aux3;
+				bir.get(i).right = aux1;				
 			}
 		}
 		
