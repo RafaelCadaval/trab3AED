@@ -11,21 +11,7 @@ import java.util.Scanner;
 
 public class Tree<E> {
 	private Node root;
-	private E element;
-	
-	private class Node {
-		public E elem;
-		public Node father;
-		public Node left;
-		public Node right;
-		
-		public Node(E elem){
-			father = null;
-			left = null;
-			right = null;
-			this.elem = elem;
-		}
-	}
+	private E element;	
 	
 	public Tree(){
 		root = null;
@@ -161,7 +147,7 @@ public class Tree<E> {
 				s = in.nextLine();
 				x = s.split(" ");
 				//ajeitar isso
-				this.buildTree(x);
+				//this.buildTree(x);
 			}
 		}
 		catch(IOException x){
