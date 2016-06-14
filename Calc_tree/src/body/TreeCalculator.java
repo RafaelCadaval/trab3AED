@@ -9,14 +9,9 @@ public class TreeCalculator {
 	public static void main(String args[]) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new FileReader("expressoes.txt"));
-		char quepo;
-		ArrayList<Node> bir = new ArrayList<>();
-		
-		while((quepo = (char)br.read()) != '\n'){
-			if (quepo != ' ')bir.add(new Node(quepo));			   			
-		}
-
-		/*	while((line = br.readLine()) != null) {
+		String line;		
+			while((line = br.readLine()) != null) {
+			ArrayList<Node> bir = new ArrayList<>();
 			int contaParenteses = 0;
 			String parts[]= line.split(" ");
 			
@@ -30,11 +25,14 @@ public class TreeCalculator {
 					System.out.println("Erro de Sintaxe!");
 					System.out.println(" ");
 					continue;
+			} else {
+				for(int j= 0; j<parts.length; j++) {
+					bir.add(new Node(parts[j]));
 				}
-		} */
-			
-		for(int i=0; i<bir.size(); i++){
-			if(bir.get(i).element == ')'){
+			}
+				 
+			for(int i=0; i<bir.size(); i++){
+			if(bir.get(i).element.equals(")")){
 				bir.remove(i);
 				i--;
 				Node aux1 = bir.get(i);
@@ -45,12 +43,20 @@ public class TreeCalculator {
 				i--;
 				Node aux3 = bir.get(i);				
 				bir.remove(i);
-				i--;
+				i--;			
 				bir.set(i, aux2);
 				bir.get(i).left = aux3;
-				bir.get(i).right = aux1;				
-			}
+				bir.get(i).right = aux1;	
+				
 		}
-		
+		}
+		bir.get(0).calcula();
+		System.out.println(bir.get(0).element);
 	}
+	}
+		
 }
+		
+	
+
+

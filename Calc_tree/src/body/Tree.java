@@ -25,6 +25,8 @@ public class Tree<E> {
 		return res;
 	}
 	
+	
+	
 	private void positionsPreAux(Node n, LinkedList<E> res){
 		if(n == null)
 			return;
