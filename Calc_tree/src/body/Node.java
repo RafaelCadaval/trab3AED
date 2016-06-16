@@ -26,11 +26,40 @@ public class Node {
 					case "*": this.element = ""+(Double.parseDouble(this.left.element) * Double.parseDouble(this.right.element));
 					break;
 					case "/": this.element = ""+(Double.parseDouble(this.left.element) / Double.parseDouble(this.right.element));
-					break;						
+					break;	
+					case "^": this.element = ""+Math.pow(Double.parseDouble(this.left.element),Double.parseDouble(this.right.element));
+					break;
 				}
-				this.element.replace(',', '.');
 			}
+		
+		public void posicoesCentral() {
+			if(this == null) System.out.println(this);
+			if(this.left != null) this.left.posicoesCentral();
+			System.out.println(this);
+			if(this.right != null) this.right.posicoesCentral();
+			System.out.println(this);
 		}
+		
+		public void posicoesLargura() {
+			
+		}
+		
+		
+		int achaAltura() {
+		    if (this == null) {
+		        return -1;
+		    }
+
+		    int left = this.left.achaAltura();
+		    int right = this.right.achaAltura();
+
+		    if (left > right) {
+		        return left + 1;
+		    } else {
+		        return right + 1;
+		    }
+		}
+	}
 
 
 

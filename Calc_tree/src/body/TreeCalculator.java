@@ -50,6 +50,7 @@ public class TreeCalculator {
 				
 		}
 		}
+		//bir.get(0).achaAltura();
 		bir.get(0).calcula();
 		System.out.println(bir.get(0).element);
 	}
