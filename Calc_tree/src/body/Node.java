@@ -1,5 +1,9 @@
 package body;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Queue;
+
 public class Node {	
 		public String element;
 		public Node father;
@@ -31,33 +35,66 @@ public class Node {
 					break;
 				}
 			}
-		
-		public void posicoesCentral() {
-			if(this == null) System.out.println(this);
-			if(this.left != null) this.left.posicoesCentral();
-			System.out.println(this);
-			if(this.right != null) this.right.posicoesCentral();
-			System.out.println(this);
-		}
-		
-		public void posicoesLargura() {
+		public void poisicoesCentral(){
+			ArrayList<Node> central = new ArrayList<>();
+			posicoesCentralAux(central);
+			System.out.print("Caminhamento Central :");
+			for(int i=0; i<central.size(); i++){
+			System.out.print(central.get(i) + " ");
+				
+			}
 			
 		}
 		
+		public void posicoesCentralAux(ArrayList central) {
+			if(this == null) return;
+			if(this.left != null)
+				this.left.posicoesCentralAux(central);
+			central.add(this.element);
+			if(this.right != null)
+				this.right.posicoesCentralAux(central);
+				
+		}
 		
-		int achaAltura() {
-		    if (this == null) {
-		        return -1;
-		    }
-
-		    int left = this.left.achaAltura();
-		    int right = this.right.achaAltura();
-
-		    if (left > right) {
-		        return left + 1;
-		    } else {
-		        return right + 1;
-		    }
+		public void posicoesLargura() {
+			ArrayList<Node> piu = new ArrayList<>();
+			ArrayList<Node> quepo = new ArrayList<>();
+			Node aux = this;
+				quepo.add(this);
+					while(!quepo.isEmpty()) {
+						aux = quepo.remove(0);
+						if(aux.left != null) quepo.add(aux.left);
+						if(aux.right != null) quepo.add(aux.right);
+						piu.add(aux);
+			}
+			System.out.print("Caminhamento em Largura :");
+			for(int i = 0;i<piu.size(); i++){
+				System.out.print(piu.get(i).element + " ");
+			}
+		}
+		
+		
+		public int achaAltura() {
+		  ArrayList<Node> fila = new ArrayList<>();
+		  Node aux = null;
+		  Node fim = null;
+		  if(this != null){
+			  fila.add(this);
+			  while(!fila.isEmpty()){
+				  aux= fila.remove(0);
+			  	  if(aux.left != null)
+			  		 fila.add(aux.left);
+			  	  if(aux.right != null)
+			  		 fila.add(aux.right);
+			  	  fim = aux;
+			  }
+		  }
+		  int count = 0;
+		  while(fim != this) {
+			  count++;
+			  fim = fim.father;			  
+		  }
+		  return count;
 		}
 	}
 
