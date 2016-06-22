@@ -35,6 +35,7 @@ public class Node {
 					break;
 				}
 			}
+		
 		public void poisicoesCentral(){
 			ArrayList<Node> central = new ArrayList<>();
 			posicoesCentralAux(central);
@@ -46,7 +47,7 @@ public class Node {
 			
 		}
 		
-		public void posicoesCentralAux(ArrayList central) {
+		private void posicoesCentralAux(ArrayList central) {
 			if(this == null) return;
 			if(this.left != null)
 				this.left.posicoesCentralAux(central);
@@ -73,7 +74,40 @@ public class Node {
 			}
 		}
 		
+		public void posicoesPre(){
+			ArrayList<Node> a = new ArrayList<>();
+			posicoesPreAux(a);
+			System.out.print("Caminhamento Pre: ");
+			for(int i=0; i<a.size(); i++){
+				System.out.print(a.get(i)+ " ");
+			}
+		}
+				
+		private void posicoesPreAux(ArrayList a){ 		
+			if(this == null)return;
+			a.add(this.element);
+			if(this.left != null)
+				this.left.posicoesPreAux(a);
+			if(this.right != null)
+				this.right.posicoesPreAux(a);			
+		}	
 		
+		public void posicoesPos(){
+			ArrayList<Node> b = new ArrayList<>();
+			posicoesPosAux(b);
+			System.out.print("Caminhamento Pos: ");
+			for(int i=0; i<b.size(); i++){
+				System.out.print(b.get(i)+ " ");
+			}
+		}
+		
+		private void posicoesPosAux(ArrayList b){
+			if(this == null)return;
+			if(this.left != null) this.left.posicoesPosAux(b);
+			if(this.right != null) this.right.posicoesPosAux(b);
+			b.add(this.element);
+		}
+
 		public int achaAltura() {
 		  ArrayList<Node> fila = new ArrayList<>();
 		  Node aux = null;

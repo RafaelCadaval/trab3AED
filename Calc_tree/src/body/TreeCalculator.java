@@ -51,7 +51,8 @@ public class TreeCalculator {
 				bir.get(i).right = aux1;	
 				
 		}
-		}
+		}		
+		System.out.println();
 		bir.get(0).posicoesLargura();
 		System.out.println();
 		bir.get(0).poisicoesCentral();
