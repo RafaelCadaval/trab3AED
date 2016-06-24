@@ -55,7 +55,7 @@ public class TreeCalculator {
 		System.out.println();
 		bir.get(0).posicoesLargura();
 		System.out.println();
-		bir.get(0).poisicoesCentral();
+		bir.get(0).posicoesCentral();
 		System.out.println();
 		System.out.println("Alutra máxima: " + bir.get(0).achaAltura());
 		bir.get(0).calcula();

@@ -36,7 +36,7 @@ public class Node {
 				}
 			}
 		
-		public void poisicoesCentral(){
+		public void posicoesCentral(){
 			ArrayList<Node> central = new ArrayList<>();
 			posicoesCentralAux(central);
 			System.out.print("Caminhamento Central :");
